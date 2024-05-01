@@ -1,0 +1,28 @@
+// @mui
+import { Button, Typography, Stack } from "@mui/material";
+import SectionContainer from "layouts/main/SectionContainer";
+import { Link, useParams } from "react-router-dom";
+
+export default function BookArtist() {
+  const { id } = useParams();
+
+  return (
+    <SectionContainer>
+      <Stack direction={{ xs: "column", md: "row" }} justifyContent='space-between'>
+        <Stack spacing={2}>
+          <Typography variant='h2' sx={{ color: "common.black" }}>
+            Book Time
+          </Typography>
+          <Link to={`/book-time/${id}`}>
+            <Button variant='outlined' sx={{ color: "common.black", borderColor: "common.black" }}>
+              Enter
+            </Button>
+          </Link>
+        </Stack>
+        <Typography variant='h3' sx={{ color: "common.black", width: "35ch", fontWeight: 400 }}>
+          Experience a private one on one video conversation with your favorite artist.
+        </Typography>
+      </Stack>
+    </SectionContainer>
+  );
+}
