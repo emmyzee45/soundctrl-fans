@@ -1,10 +1,10 @@
 // @mui
 import { Icon } from "@iconify/react";
-import { Box, Button, Chip, Stack, Typography } from "@mui/material";
+import { Box, Button, Chip, Stack, Typography, Link } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { ArtistImage } from "assets";
 import Image from "components/Image";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   margin: "auto",
@@ -42,7 +42,7 @@ export default function BookingHero() {
             Kiwi Juice, his loose and colorful arrangements could soundtrack just about anything,
             anywhere.
           </Typography>
-          <Link to={`/pay/${id}?type=subscription&price=${3}`}>
+          <Link href={`/pay/${id}?type=subscription&price=${3}`} underline="none">
           <Button
             variant='contained'
             size='large'

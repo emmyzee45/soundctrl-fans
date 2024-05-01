@@ -1,8 +1,8 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography, Link } from "@mui/material";
 import { BookingProps } from "@types";
 import { TicketOne } from "assets";
 import Image from "components/Image";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
 
 
@@ -20,7 +20,8 @@ export default function NewTicket({artistId, _id, time, link, price, fanId, meet
           <Typography variant='subtitle2'>${time}mins</Typography>
           <Typography variant='subtitle2'>0.04ETH ${price}</Typography>
         </Stack>
-        <Link to={`/pay/${_id}?type=booking&price=${price}&artist_id=${artistId}`}>
+        <Link href={`/pay/${_id}?type=booking&price=${price}&artist_id=${artistId}`} underline="none">
+          <Stack spacing={2}>
           <Button
             variant='contained'
             sx={{
@@ -35,6 +36,7 @@ export default function NewTicket({artistId, _id, time, link, price, fanId, meet
             >
             Buy
           </Button>
+          </Stack>
         </Link>
       </Stack>
     </Box>

@@ -1,7 +1,7 @@
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // @mui
 import { styled, useTheme } from "@mui/material/styles";
-import { Box, Button, AppBar, Toolbar, Container } from "@mui/material";
+import { Box, Button, AppBar, Toolbar, Container, Link } from "@mui/material";
 // hooks
 import useOffSetTop from "../../hooks/useOffSetTop";
 import useResponsive from "../../hooks/useResponsive";
@@ -119,7 +119,9 @@ export default function MainHeader() {
             justifyContent: "space-between",
           }}
         >
-          <Link to='/' style={{ textDecoration: "none" }}>
+          <Link 
+            underline="none"
+            href='/' style={{ textDecoration: "none" }}>
             <Image src={Logo} alt='logo' />
           </Link>
           <Box sx={{ flexGrow: 1 }} />
@@ -131,7 +133,8 @@ export default function MainHeader() {
               {isAuthenticated ? (
                 <>
                   <Link
-                    to='/'
+                    underline="none"
+                    href='/'
                     style={{
                       textDecoration: "none",
                       ...linkStyles.layout,
@@ -142,7 +145,8 @@ export default function MainHeader() {
                     Home
                   </Link>
                   <Link
-                    to='/trending'
+                    underline="none"
+                    href='/trending'
                     style={{
                       textDecoration: "none",
                       ...linkStyles.layout,
@@ -152,9 +156,11 @@ export default function MainHeader() {
                   >
                     Explore
                   </Link>
-                  {/* <Link to='/chat' style={{ textDecoration: "none", ...linkStyles.layout, ...linkStyles.typography, ...linkStyles.color }}>Superfan Chat</Link> */}
+                  {/* <Link underline="none"
+                  href='/chat' style={{ textDecoration: "none", ...linkStyles.layout, ...linkStyles.typography, ...linkStyles.color }}>Superfan Chat</Link> */}
                   <Link
-                    to='/fan-profile'
+                    underline="none"
+                    href='/fan-profile'
                     style={{
                       textDecoration: "none",
                       ...linkStyles.layout,
@@ -164,8 +170,10 @@ export default function MainHeader() {
                   >
                     Profile
                   </Link>
-                  {/* <Link to="" onClick={handleLogOut} style={{ ...linkStyles.layout, ...linkStyles.typography, ...linkStyles.color }}>LOG OUT</Link> */}
-                  <Link to=''>
+                  {/* <Link underline="none"
+                  href="" onClick={handleLogOut} style={{ ...linkStyles.layout, ...linkStyles.typography, ...linkStyles.color }}>LOG OUT</Link> */}
+                  <Link underline="none"
+                  href=''>
                     <Button variant='text' sx={{ color: "grey.700" }} onClick={handleLogOut}>
                       LOG OUT
                     </Button>
@@ -173,7 +181,8 @@ export default function MainHeader() {
                 </>
               ) : (
                 <>
-                  <Link to='/login' style={{ marginRight: "10px" }}>
+                  <Link underline="none"
+                  href='/login' style={{ marginRight: "10px" }}>
                     LOG IN
                   </Link>
                   {/* <Link href='/register'>SIGN UP</Link> */}
@@ -182,7 +191,8 @@ export default function MainHeader() {
             </>
           ) : (
             <>
-              <Link to='/login'>LOG IN</Link>
+              <Link underline="none"
+              href='/login'>LOG IN</Link>
               {/* <Link href='/register'>SIGN UP</Link> */}
             </>
           )}

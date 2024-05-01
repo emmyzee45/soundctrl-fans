@@ -1,7 +1,7 @@
 // @mui
-import { Button, Typography, Stack } from "@mui/material";
+import { Button, Typography, Stack, Link } from "@mui/material";
 import SectionContainer from "layouts/main/SectionContainer";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function BookArtist() {
   const { id } = useParams();
@@ -13,10 +13,12 @@ export default function BookArtist() {
           <Typography variant='h2' sx={{ color: "common.black" }}>
             Book Time
           </Typography>
-          <Link to={`/book-time/${id}`}>
-            <Button variant='outlined' sx={{ color: "common.black", borderColor: "common.black" }}>
-              Enter
-            </Button>
+          <Link href={`/book-time/${id}`}>
+            <Stack spacing={2}>
+              <Button variant='outlined' sx={{ color: "common.black", borderColor: "common.black" }}>
+                Enter
+              </Button>
+            </Stack>
           </Link>
         </Stack>
         <Typography variant='h3' sx={{ color: "common.black", width: "35ch", fontWeight: 400 }}>

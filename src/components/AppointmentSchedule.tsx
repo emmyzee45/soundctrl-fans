@@ -144,7 +144,6 @@ const AppointmentScheduler = ({ selectedBooking }: selectedBooking) => {
           )}
 
           <Grid>
-            <a href='#' style={{ textDecoration: "none", marginTop: "20px" }}>
               <Button
                 variant='contained'
                 size='large'
@@ -166,7 +165,6 @@ const AppointmentScheduler = ({ selectedBooking }: selectedBooking) => {
               >
                 {scheduleSaved ? "CHANGE MY SCHEDULE" : "SAVE THIS SCHEDULE"}
               </Button>
-            </a>
           </Grid>
         </Grid>
         <Notification 

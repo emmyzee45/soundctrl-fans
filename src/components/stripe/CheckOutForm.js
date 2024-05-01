@@ -7,7 +7,6 @@ export default function CheckOutForm() {
     const stripe = useStripe();
     const navigate = useNavigate();
     const { id } = useParams();
-
     const {search} = useLocation();
     const type = new URLSearchParams(search).get("type");
     const price = new URLSearchParams(search).get("price");

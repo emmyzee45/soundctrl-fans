@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography, Link } from "@mui/material";
 import SectionContainer from "layouts/main/SectionContainer";
 import { useContext, useEffect, useState } from "react";
 import { secondaryButtonStyles } from "utils/cssStyles";
@@ -22,7 +22,7 @@ export default function Success() {
   const payment_intent = location.state?.payment_intent;
 
   const handleBackToLogin = () => {
-    navigate( type === "subscription" ? `/book/${artist_id}`: `/book-time/${artist_id}`);
+    navigate( type === "subscription" ? `/book/${id}`: `/book-time/${artist_id}`);
   };
 
   useEffect(() => {
@@ -75,16 +75,17 @@ useEffect(() => {
       </Typography>
 
       <Stack justifyContent='center' marginInline='auto' width={{ md: "15%" }}>
+          <Link href={type === "subscription" ? `/book/${id}`: `/book-time/${artist_id}`} underline="none">
         <Stack spacing={2} marginBlock={5}>
-          <Button
-            variant='contained'
-            size='medium'
-            sx={secondaryButtonStyles}
-            onClick={handleBackToLogin}
-          >
-            Back
-          </Button>
+            <Button
+              variant='contained'
+              size='medium'
+              sx={secondaryButtonStyles}
+              >
+              Back
+            </Button>
         </Stack>
+          </Link>
       </Stack>
     </SectionContainer>
   );

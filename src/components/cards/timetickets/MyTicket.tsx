@@ -43,7 +43,6 @@ export default function MyTicket({
           <Grid container justifyContent='center' alignItems='center'>
             {" "}
             {status === "sold" && (
-              <a href='#' style={{ textDecoration: "none" }}>
               <Button
                 variant='contained'
                 size='large'
@@ -64,7 +63,6 @@ export default function MyTicket({
               >
                 BOOK A TIME
               </Button>
-            </a>
             )}
           </Grid>
           { status === "book" && (<>
@@ -73,14 +71,14 @@ export default function MyTicket({
               Meeting link
             </Typography>
           </Stack>
-          <a href='#' style={{ textDecoration: "none" }}>
-            <Button
-              size='small'
-              sx={{ color: "rgba(51, 153, 255, 1)", fontSize: 12, textTransform: "lowercase" }}
-            >
-              {link}
-            </Button>
-          </a>
+            <Stack spacing={2}>
+              <Button
+                size='small'
+                sx={{ color: "rgba(51, 153, 255, 1)", fontSize: 12, textTransform: "lowercase" }}
+                >
+                {link}
+              </Button>
+            </Stack>
           </>)}
         </Stack>
       </Stack>

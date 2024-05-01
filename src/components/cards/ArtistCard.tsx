@@ -1,13 +1,13 @@
-import { Box, Stack, Typography, Button } from "@mui/material";
+import { Box, Stack, Typography, Button, Link } from "@mui/material";
 import { ArtistCardType, UserProps } from "@types";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Avatar from "components/Avatar";
 import Image from "components/Image";
 import { primaryButtonStyles } from "utils/cssStyles";
 
 const ArtistCard = ({ bannerImg, avatarImg, username, _id }: UserProps) => {
   return (
-    <Link to={`/book/${_id}`}>
+    <Link href={`/book/${_id}`} underline="none">
     <Box sx={{ bgcolor: "rgba(237, 237, 237, 1)", borderRadius: 2, cursor: "pointer" }}>
       <Stack direction='row' spacing={3}>
         <Image src={bannerImg} alt='artist' sx={{ borderRadius: 2 }} />
