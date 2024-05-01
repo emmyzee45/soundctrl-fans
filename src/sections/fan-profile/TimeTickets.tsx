@@ -59,7 +59,6 @@ export default function TimeTickets() {
   const filteredBookings = bookings.filter((booking) => booking.fanId === user?._id);
   const usedBooking = filteredBookings.filter((item) => item.status === "book");
   const boughtBooking = filteredBookings.filter((item) => item.status === "sold");
-  console.log(filteredBookings)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

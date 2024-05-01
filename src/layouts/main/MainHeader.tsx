@@ -69,7 +69,9 @@ export default function MainHeader() {
       await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/logout`);
       localStorage.removeItem("access_token");
       dispatch(logOut());
-      navigate("/login");
+      setTimeout(() => {
+        navigate("/login");
+      },1000)
     } catch (err) {}
   };
 
@@ -172,12 +174,12 @@ export default function MainHeader() {
                   </Link>
                   {/* <Link underline="none"
                   href="" onClick={handleLogOut} style={{ ...linkStyles.layout, ...linkStyles.typography, ...linkStyles.color }}>LOG OUT</Link> */}
-                  <Link underline="none"
-                  href=''>
+                  {/* <Link underline="none"
+                  href=''> */}
                     <Button variant='text' sx={{ color: "grey.700" }} onClick={handleLogOut}>
                       LOG OUT
                     </Button>
-                  </Link>
+                  {/* </Link> */}
                 </>
               ) : (
                 <>

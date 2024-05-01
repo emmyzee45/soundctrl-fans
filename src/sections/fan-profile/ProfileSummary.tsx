@@ -1,11 +1,11 @@
 // @mui
 import { Icon } from "@iconify/react";
-import { Typography, Stack, Button } from "@mui/material";
+import { Typography, Stack, Button, Link } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { UserProps } from "@types";
 import { User } from "assets";
 import Avatar from "components/Avatar";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   margin: "auto",
@@ -28,7 +28,7 @@ export default function ProfileSummary(user: UserProps) {
             <Typography variant='h4' sx={{ fontWeight: 400 }}>
               @{user.username}
             </Typography>
-            <Link to="/fan-settings">
+            <Link href="/fan-settings" underline="none">
               <Button
                 variant='outlined'
                 size='small'
