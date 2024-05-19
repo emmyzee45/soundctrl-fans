@@ -6,7 +6,8 @@ import CheckoutForm from "../components/stripe/CheckOutForm";
 import "../components/stripe/pay.css";
 import axios from "axios";
 
-const stripeKey: string = "pk_test_51OYl3MHuxvfPN8eLcxKFWOqMKjvkRgrTKVQisgLiMcEafuYzrCi6d9T63KYXTYFEusQIg1psD3BeGeA2gjBbf9YJ00mXhJ97xf" || "";
+// "pk_test_51OYl3MHuxvfPN8eLcxKFWOqMKjvkRgrTKVQisgLiMcEafuYzrCi6d9T63KYXTYFEusQIg1psD3BeGeA2gjBbf9YJ00mXhJ97xf" || ""
+const stripeKey: string = process.env.REACT_APP_STRIPE;
 
 const stripePromise: Promise<Stripe | null> = loadStripe(stripeKey)
 
