@@ -6,7 +6,7 @@ import Image from "components/Image";
 import { useAppSelector } from "../../../redux/hooks";
 
 
-export default function NewTicket({artistId, _id, time, link, price, fanId, meetingId, status, username }: BookingProps ) {
+export default function NewTicket({artistId, _id, interval, link, price, fanId, meetingId, status, username }: BookingProps ) {
   const artists = useAppSelector((state) => state.artist.artists);
   const artist = artists.filter((artist) => artist._id === artistId)[0]
 
@@ -17,7 +17,7 @@ export default function NewTicket({artistId, _id, time, link, price, fanId, meet
       <Stack spacing={1} sx={{ padding: 2, bgcolor: "common.white", borderRadius: 5 }}>
         <Typography variant='h5'>Tea time with @{artist?.username}</Typography>
         <Stack direction='row' justifyContent='space-between'>
-          <Typography variant='subtitle2'>${time}mins</Typography>
+          <Typography variant='subtitle2'>${interval}mins</Typography>
           <Typography variant='subtitle2'>0.04ETH ${price}</Typography>
         </Stack>
         <Link href={`/pay/${_id}?type=booking&price=${price}&artist_id=${artistId}`} underline="none">

@@ -23,11 +23,13 @@ export type BookingProps = {
   artistId: string,
   fanId: string,
   time: string,
+  date: string,
   link: string,
   price: string,
   status: string,
   meetingId: string,
   username: string,
+  interval: string
 }
 
 export type TicketType = {

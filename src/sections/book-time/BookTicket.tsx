@@ -5,10 +5,13 @@ import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TicketCard } from "components/cards";
 import AppointmentSchedule from "components/AppointmentSchedule";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { updateBookingFailure, updateBookingStart, updateBookingSuccess } from "../../redux/redux-slices/BookingSlice";
 import MyTicket from "components/cards/timetickets/MyTicket";
 import NewTicket from "components/cards/timetickets/NewTicket";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import Notification from "components/Notification";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   margin: "auto",
@@ -49,11 +52,17 @@ function a11yProps(index: number) {
 
 export default function BookTicket() {
   const [value, setValue] = useState(0);
+  const [message, setMessage] = useState<string>("");
+  const [show, setShow] = useState<boolean>(false);
+  const [scheduleSaved, setScheduleSaved] = useState<boolean>(false);
   const [selectedBooking, setSelectedBooking] = useState<string>("");
 
   const { id } = useParams();
-  
+  const dispatch = useAppDispatch();
+
+  const user = useAppSelector((state) => state.user.currentUser);
   const bookings = useAppSelector((state) => state.booking.bookings);
+  const booking = bookings.filter((booking) => booking._id === selectedBooking)[0];
 
   const userBookings = [...bookings].filter((item) => item.status === "selling" && item.artistId === id)
   
@@ -63,6 +72,31 @@ export default function BookTicket() {
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+  };
+
+  const handleSaveSchedule = async() => {
+    // Logic to save the schedule <Emmy>
+    dispatch(updateBookingStart())
+    try {
+      const res = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/bookings/event/${selectedBooking}`, 
+        {artistId: booking.artistId, meetingId: booking.meetingId, email: user?.email}
+      );
+      setShow(true);
+      setMessage("Meeting successfully booked!");
+      dispatch(updateBookingSuccess(res.data));
+      setScheduleSaved(true);
+    }catch(err: any) {
+      if(!err.response) {
+        setMessage("No server response!");
+      } else if(err.response.status === 403 || err.response.status === 401) {
+        setMessage("Unauthorized")
+      } else {
+        setMessage("Interval server error!")
+      }
+      setShow(true)
+      dispatch(updateBookingFailure())
+    }
   };
 
   return (
@@ -101,11 +135,13 @@ export default function BookTicket() {
                     artistId={item.artistId}
                     fanId={item.fanId}
                     time={item.time}
+                    date={item.date}
                     link={item.link}
                     price={item.price}
                     status={item.status}
                     meetingId={item.meetingId}
                     username={item.username}
+                    interval={item.interval}
                   />
                 </Grid>
               ))}
@@ -120,11 +156,13 @@ export default function BookTicket() {
                     artistId={item.artistId}
                     fanId={item.fanId}
                     time={item.time}
+                    date={item.date}
                     link={item.link}
                     price={item.price}
                     status={item.status}
                     meetingId={item.meetingId}
                     username={item.username}
+                    interval={item.interval}
                     setSelectedBooking={setSelectedBooking}
                   />
                 </Grid>
@@ -143,10 +181,13 @@ export default function BookTicket() {
           }}
         >
           <AppointmentSchedule 
-            selectedBooking={selectedBooking}
+            selectedBookingId={selectedBooking}
           />
           <Button
             variant='contained'
+            size="large"
+            disabled={!selectedBooking}
+            onClick={handleSaveSchedule}
             sx={{
               bgcolor: "common.black",
               color: "common.white",
@@ -157,10 +198,15 @@ export default function BookTicket() {
               },
             }}
           >
-            Book sections for 05 Aug
+            {scheduleSaved ? "CHANGE MY SCHEDULE" : "SAVE THIS SCHEDULE"}
           </Button>
         </Stack>
       </Stack>
+      <Notification 
+          show={show}
+          setShow={setShow}
+          message={message}
+        />
     </ContentStyle>
   );
 }

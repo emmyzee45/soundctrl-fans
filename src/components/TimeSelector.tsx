@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 
 interface TimeSelectorProps {
   selectedTime: string;
-  onTimeChange: (time: string) => void;
   timeInterval: number;
 }
 
@@ -20,10 +19,9 @@ const StyledSelect = styled("select")({
 
 const TimeSelector: React.FC<TimeSelectorProps> = ({
   selectedTime,
-  onTimeChange,
   timeInterval,
 }) => {
-  const startTimeHour = 7;
+  const startTimeHour = parseInt(selectedTime.slice(0,2)) > 12 ? 12 : 7;
   const endTimeHour = 23;
 
   // Generate time slots based on the selected time interval
@@ -47,17 +45,17 @@ const TimeSelector: React.FC<TimeSelectorProps> = ({
 
   return (
     <div>
-      <h2 style={{ fontSize: "18px", marginBottom: "8px", display: "block" }}>
+      {/* <h2 style={{ fontSize: "18px", marginBottom: "8px", display: "block" }}>
         Select Time:
-      </h2>
-      <StyledSelect value={selectedTime} onChange={(e) => onTimeChange(e.target.value)}>
-        <option value=''>Select</option>
-        {timeSlots.map((slot) => (
-          <option key={slot} value={slot}>
+      </h2> */}
+      {/* <StyledSelect value={selectedTime} onChange={(e) => onTimeChange(e.target.value)}> */}
+        {/* <option value=''>Select</option> */}
+        {timeSlots.slice(0,12).map((slot) => (
+          <div key={slot} style={{backgroundColor: slot == selectedTime ? "rgba(253, 147, 76, 1)": "white", textAlign: "center"}} >
             {slot}
-          </option>
+          </div>
         ))}
-      </StyledSelect>
+      {/* </StyledSelect> */}
     </div>
   );
 };

@@ -23,11 +23,15 @@ export default function App() {
   const {search} = useLocation();
   const type = new URLSearchParams(search).get("type");
   const price = new URLSearchParams(search).get("price");
+  const artist_id = new URLSearchParams(search).get("artist_id");
 
   useEffect(() => {
     const createPaymentIntent = async() => {
       try {
-        const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/orders/create-payment-intent`, {price, type, artistId: id});
+        const res = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/orders/create-payment-intent`, 
+          { price, type, artistId: type == "booking" ? artist_id : id }
+        );
         setClientSecret(res.data.clientSecret)
       }catch(err) {
         console.log(err)
